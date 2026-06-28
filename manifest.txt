@@ -1,0 +1,83 @@
+===================================================================
+👁️ ARGUS ECOSYSTEM - CORE TECHNICAL MANIFEST
+===================================================================
+
+ARGUS is an advanced, automated cybersecurity platform engineered 
+around a real-time Multi-Agent AI Architecture operating under 
+a specialized Purple Team paradigm. 
+
+The ecosystem orchestrates its offensive and defensive workloads 
+through two high-performance logical engines:
+
+1. OFFENSIVE AGENT (Red Team / Discovery Node):
+   - Automated Perimeter Scan: Dynamically maps and queries assets
+     for active endpoints and hidden directories (Nmap/Fuzzer).
+   - Vulnerability Profiling: Real-time identification of critical 
+     attack vectors (LFI, CRLF, Host Header Injection, Takeovers).
+   - Structured JSON Payload Delivery: Converts raw telemetry and 
+     compromise evidence into clean, encrypted, and standardized 
+     JSON formats for seamless integration.
+
+2. DEFENSIVE AGENT (Blue Team / Auditing Core):
+   - Intelligent Local Ingestion: Consumes the offensive JSON logs 
+     on the fly, feeding an isolated LLM (qwen2.5-coder:7b) running 
+     locally on dedicated hardware via Ollama.
+   - Forensic Triage & Remediation: Executes real-time forensic 
+     analysis, classifying risks while generating a comprehensive 
+     compliance-ready report matching issues with actionable fixes 
+     (NIST SP 800-61 r2 / ISO 27001 standards).
+
+3. SECURE LAYER & ACTIVE TELEMETRY (SIEM):
+   - Cryptographic Guardrails: Core multi-client logging functions 
+     are shielded, requiring valid user authentication to decrypt 
+     or fetch history logs.
+   - Proactive Telegram Alerts: Any unauthenticated or malicious 
+     tampering trigger acts as an automated tripwire, pushing 
+     immediate encrypted telemetry alerts to the operator's satellite.
+
+Developed by: sh4d3null
+System Core: EVA-v5.4 Forensic Intelligence
+===================================================================
+
+===================================================================
+👁️ ECOSISTEMA ARGUS - MANIFIESTO TÉCNICO CENTRAL
+===================================================================
+
+ARGUS es una plataforma avanzada y automatizada de ciberseguridad 
+diseñada en torno a una arquitectura de IA Multi-Agente en tiempo real, 
+operando bajo un paradigma especializado de Purple Team.
+
+El ecosistema orquesta sus cargas de trabajo ofensivas y defensivas 
+a través de dos motores lógicos de alto rendimiento:
+
+1. AGENTE OFENSIVO (Red Team / Nodo de Descubrimiento):
+   - Escaneo Automatizado del Perímetro: Mapea y consulta activos 
+     dinámicamente en busca de endpoints activos y directorios ocultos 
+     (Nmap/Fuzzer).
+   - Perfilado de Vulnerabilidades: Identificación en tiempo real de 
+     vectores de ataque críticos (LFI, CRLF, Inyección de Host Headers, 
+     Subdomain Takeovers).
+   - Entrega de Carga Útil Estructurada en JSON: Convierte la telemetría 
+     cruda y las evidencias de compromiso en formatos JSON limpios, 
+     encriptados y estandarizados para una integración sin ruidos.
+
+2. AGENTE DEFENSIVO (Blue Team / Núcleo de Auditoría):
+   - Ingesta Local Inteligente: Consume los registros JSON ofensivos 
+     al vuelo, alimentando un modelo LLM aislado (qwen2.5-coder:7b) que 
+     corre localmente en hardware dedicado a través de Ollama.
+   - Triaje Forense y Mitigación: Ejecuta análisis forense en tiempo 
+     real, clasificando los riesgos mientras genera un informe completo 
+     auditable, emparejando los fallos con soluciones accionables 
+     (estándares NIST SP 800-61 r2 / ISO 27001).
+
+3. CAPA SEGURA Y TELEMETRÍA ACTIVA (SIEM):
+   - Barreras Criptográficas: Las funciones centrales de registro de 
+     múltiples clientes están blindadas, requiriendo autenticación de 
+     usuario válida para desencriptar o consultar los logs históricos.
+   - Alertas Proactivas en Telegram: Cualquier intento de manipulación 
+     no autenticado o malicioso actúa como un cable de trampa automatizado, 
+     enviando telemetría de alerta inmediata al satélite del operador.
+
+Desarrollado por: sh4d3null
+Núcleo del Sistema: EVA-v5.4 Inteligencia Forense
+===================================================================
