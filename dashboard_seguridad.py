@@ -109,7 +109,7 @@ def consultar_agente_local_y_encriptar(empresa, tipo_auditoria, datos_crudos, pa
         # Importación tardía para evitar colisiones de inicialización en Streamlit
         from shadenull_core import guardar_auditoria_cliente
         
-        # Guardamos en tu archivo jerárquico .txt delimitado por saltos de línea
+        # Guardamos en el archivo jerárquico .txt delimitado por saltos de línea
         guardar_auditoria_cliente(
             empresa=empresa,
             tipo_auditoria=tipo_auditoria,
@@ -186,8 +186,7 @@ def obtener_datos_mapa(ip_list):
                     }
                 )
             else:
-                # Si es una IP nueva y no hay internet, la ponemos en el centro (Ecuador/Océano)
-                # para que no rompa el mapa, o simplemente no la pineamos.
+
                 continue
 
     return puntos
@@ -241,7 +240,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# --- 2. SISTEMA DE AUTENTICACIÓN DB (LA VALLA) ---
+# --- 2. SISTEMA DE AUTENTICACIÓN DB  ---
 if "autenticado" not in st.session_state:
     st.session_state.autenticado = False
 
@@ -271,7 +270,7 @@ if not st.session_state.autenticado:
                 )
                 st.rerun()
             else:
-                # Opcional: Podés disparar una alerta a Telegram si alguien falla el login
+                # Opcional: Se puede disparar una alerta a Telegram si alguien falla el login
                 st.error(
                     "❌ Credenciales inválidas. Intento reportado a la unidad central."
                 )
@@ -375,7 +374,7 @@ def create_pdf(modulo, objetivo, df, remediacion=""):
         try:
             import os
 
-            # Obtenemos la ruta exacta de la carpeta donde está tu script
+            # Obtenemos la ruta exacta de la carpeta donde está el script
             ruta_actual = os.path.dirname(os.path.abspath(__file__))
             ruta_logo = os.path.join(ruta_actual, "LogoSWblanco200.png")
 
@@ -383,7 +382,7 @@ def create_pdf(modulo, objetivo, df, remediacion=""):
             if os.path.exists(ruta_logo):
                 pdf.image(ruta_logo, x=165, y=5, w=35)
             else:
-                # Esto te va a decir en la terminal si no lo encuentra
+                # Esto va a decir en la terminal si no lo encuentra
                 print(f"DEBUG: No se encontró el logo en {ruta_logo}")
         except Exception as e:
             print(f"DEBUG: Error cargando logo: {e}")
@@ -429,7 +428,7 @@ def create_pdf(modulo, objetivo, df, remediacion=""):
             columnas = list(df.columns)
             ancho_col = max(40, 190 / len(columnas))
 
-            # Encabezados de Tabla (Fondo Púrpura, Texto Blanco)
+            # Encabezados de Tabla
             pdf.set_font("Arial", "B", 10)
             pdf.set_fill_color(63, 0, 127)
             pdf.set_text_color(255, 255, 255)
@@ -541,7 +540,7 @@ def pro_fuzzer_scan_db(url):
                         "Ruta": f"/{path}",
                         "Codigo": res.status_code,
                         "Estado": status_msg.get(res.status_code, "Detectado"),
-                        # --- NUEVO: Agregamos contexto para la IA ---
+                        # --- Agregamos contexto para la IA ---
                         "Full_URL": target_url,
                     }
                 )
@@ -568,7 +567,7 @@ def enviar_alerta_telegram(mensaje):
         payload = {
             "chat_id": cid,
             "text": mensaje,
-            # quita Markdown por ahora para evitar errores ocultos
+            # quita Markdown para evitar errores ocultos
         }
 
         r = requests.post(url, data=payload, timeout=10)
@@ -609,7 +608,7 @@ def scan_ports(comando_o_target):
         # Si el usuario escribió el comando entero, lo usamos tal cual
         comando = comando_o_target
     else:
-        # Si solo puso la IP o dominio, le armamos un tiro rápido estándar
+        # Si solo puso la IP o dominio, le armamos
         comando = f"nmap -sS --top-ports 20 {comando_o_target}"
     
     # 2. Invocar al ejecutable nativo del sistema de forma segura
@@ -707,7 +706,7 @@ def check_vulnerability(url):
     payloads = {
         "XSS": "<script>alert('ARGUS Ecosystem')</script>",
         "SQLi": "' OR '1'='1",
-        "Path Traversal": "../../../etc/passwd",  # Nuevo: Prueba de acceso a archivos
+        "Path Traversal": "../../../etc/passwd",  #Prueba de acceso a archivos
     }
 
     if "vulnweb.com" in url and "/" not in url:
@@ -1252,7 +1251,7 @@ def leak_finder_scan(url):
             target = f"{url}/{leak}"
             res = requests.get(target, timeout=4, verify=False, allow_redirects=False)
 
-            # Si el código es 200, encontramos oro.
+            # Si el código es 200, encontramos vlnt.
             if res.status_code == 200:
                 # Verificamos si no es una página de error 404 camuflada
                 if len(res.text) > 0:
@@ -1759,7 +1758,7 @@ if menu == "Centro de Comando":
 
     st.markdown("---")
 
-    # --- 🛡️ CARGA ÚNICA DE INTELIGENCIA (Evita errores de variable) ---
+    # --- CARGA ÚNICA DE INTELIGENCIA (Evita errores de variable) ---
     df_inteligencia = obtener_blacklist()
     if not df_inteligencia.empty:
         lista_ips_radar = df_inteligencia["ip"].tolist()
@@ -1797,7 +1796,7 @@ if menu == "Centro de Comando":
     m4.metric("Accesos Fallidos", "27", delta="Simulado")
     st.markdown("---")
 
-    # 3. 🌍 RADAR GLOBAL DINÁMICO
+    # 3.  RADAR GLOBAL DINÁMICO
     st.subheader("🌍 Radar Global de Amenazas (Sincronizado con DB)")
     with st.spinner("Sincronizando con el satélite..."):
         datos_puntos = obtener_datos_mapa(lista_ips_radar)
@@ -1820,7 +1819,7 @@ if menu == "Centro de Comando":
         except Exception as e:
             st.error(f"Error en el barrido: {e}")
 
-    # 4. 🧠 ANÁLISIS DE GUARDIA (EVA)
+    # 4.  ANÁLISIS DE GUARDIA (EVA)
     st.markdown("---")
     c_eva1, c_eva2 = st.columns([1, 4])
     with c_eva1:
@@ -1965,7 +1964,7 @@ elif menu == "Métricas e Histórico":
             # Normalización defensiva de tags para evitar fallos de coincidencia exacta con el búnker
             tag_busqueda_real = modulo_a_filtrar
             if modulo_a_filtrar == "Network Perimeter Audit":
-                # Si en tu backend se guardó originalmente con un string más corto, ajústalo acá:
+                # Si en backend se guardó originalmente con un string más corto, ajustarlo acá:
                 tag_busqueda_real = "Network Audit" 
 
             # Ejecutamos la extracción limpia usando la contraseña persistida en memoria
@@ -2087,7 +2086,7 @@ elif menu == "Sentinel (Red)":
                 # CONCATENACIÓN CRÍTICA: Fusionamos la sentencia del selector con el Host objetivo
                 comando_final_ejecucion = f"{sentencia_base} {target}"
                 
-                # Llamamos a tu nueva función de subprocess pasándole la cadena armada
+                # Llamamos la nueva función de subprocess pasándole la cadena armada
                 df_res = scan_ports(comando_final_ejecucion)
                 
                 st.session_state.df_sentinel = df_res
@@ -2111,7 +2110,7 @@ elif menu == "Sentinel (Red)":
 
         st.markdown("---")
 
-        # === TU MOTOR ORIGINAL DEL MAPA CYBERPUNK INTACTO ===
+        # === MOTOR DEL MAPA CYBERPUNK ===
         st.subheader("🛰️ Matriz Visual de Ruta Física (Telemetría Automática)")
         with st.spinner("EVA calculando saltos de red de forma asíncrona..."):
             mapa_autodisparado = mapear_ruta_cyberpunk(t_sentinel)
@@ -2210,16 +2209,16 @@ elif menu == "Sentinel (Red)":
                     El arsenal dinámico de **ARGUS Ecosystem** está calibrado. Revisa la sección **3** del informe de arriba, copia la sentencia recomendada por EVA y ejecútala en tu consola para romper el bloqueo del firewall.
                     """)
                     
-                    # Disparador automático a tu Telegram si es Crítico (Falso negativo confirmado)
+                    # Disparador automático a Telegram si es Crítico (Falso negativo confirmado)
                     if "nmap -" in informe_completo:
                         mensaje_tele = f"📡 ARGUS Ecosystem INTEL: Detectado posible bloqueo por Firewall en '{t_sentinel}'. EVA sugiere pivotar el armamento perimetral."
                         enviar_alerta_telegram(mensaje_tele)
 
-        # --- EL BOTÓN DE DESCARGA CONECTADO A TU NUEVA PLANTILLA DE RED EXTERNA ---
+        # --- EL BOTÓN DE DESCARGA CONECTADO A LA NUEVA PLANTILLA DE RED EXTERNA ---
         st.markdown("---")
         st.subheader("📥 Exportación Ejecutiva")
         try:
-            # Traemos el historial cifrado de la subcarpeta para armar el PDF completo de esa empresa
+            # Trae el historial cifrado de la subcarpeta para armar el PDF completo de la empresa
             from shadenull_core import recuperar_auditorias_cliente
             registros_red = recuperar_auditorias_cliente(empresa_cliente, pass_cliente)
             
@@ -2431,7 +2430,7 @@ elif menu == "Cookie Auditor":
             if st.button("🧠 Analizar Peligrosidad de Sesión"):
                 with st.spinner("EVA evaluando vectores de Session Hijacking..."):
                     contexto_ck = f"Auditoría de Cookies de Sesión en {t_cookies}"
-                    # EVA analiza incluso si están bien configuradas (Felicita la gestión de sesión)
+                    # EVA analiza incluso si están bien configuradas
                     datos_ck = (
                         df.to_string()
                         if not df.empty
